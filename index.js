@@ -48,7 +48,12 @@ client.on('voiceStateUpdate', (oldState, newState) => {
     if (newState.channel && newState.channel.id === monitoredChannelId && isAnyOurId) {
 
         // has been logged today
-        if(todaysJoinDate !==null && dayjs().isToday(todaysJoinDate)) return;
+        if(
+            process.env.onceAday &&
+            todaysJoinDate !==null
+            && dayjs().isToday(todaysJoinDate)
+        ) return;
+
         todaysJoinDate = new Date(new Date().getTime() + 7200000);
 
         const connection = joinVoiceChannel({
