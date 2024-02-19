@@ -51,11 +51,10 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
         console.log('joined')
         // has been logged today
-        if(
-            !process.env.onceAday ||
-            (todaysJoinDate !==null
-            && dayjs().isToday(todaysJoinDate))
-        ) return;
+        // if(
+        //     (todaysJoinDate !==null
+        //     && dayjs().isToday(todaysJoinDate))
+        // ) return;
 
         todaysJoinDate = new Date(new Date().getTime() + 7200000);
 
@@ -66,8 +65,9 @@ client.on('voiceStateUpdate', (oldState, newState) => {
         });
 
         const player = createAudioPlayer();
-        const resource = createAudioResource('./audiofile.mp3');
-
+        // const resource = createAudioResource('./audiofile.mp3');
+        const resource = createAudioResource('https://cdn.pixabay.com/audio/2024/01/21/audio_6be844d826.mp3');
+        // resource.volume.setVolume(0.2);
         const formattedDate = dayjs(todaysJoinDate).format('dddd, MMMM D, YYYY HH:mm')
         messageChanel.send('ARTEM ZAISHOV SYOHODNI O \n' + formattedDate)
 
