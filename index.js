@@ -52,9 +52,9 @@ client.on('voiceStateUpdate', (oldState, newState) => {
         console.log('joined')
         // has been logged today
         if(
-            process.env.onceAday &&
-            todaysJoinDate !==null
-            && dayjs().isToday(todaysJoinDate)
+            !process.env.onceAday ||
+            (todaysJoinDate !==null
+            && dayjs().isToday(todaysJoinDate))
         ) return;
 
         todaysJoinDate = new Date(new Date().getTime() + 7200000);
