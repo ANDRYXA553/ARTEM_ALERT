@@ -49,7 +49,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
         // has been logged today
         if(todaysJoinDate !==null && dayjs().isToday(todaysJoinDate)) return;
-        todaysJoinDate = new Date();
+        todaysJoinDate = new Date(new Date().getTime() + 7200000);
 
         const connection = joinVoiceChannel({
             channelId: channel.id,
