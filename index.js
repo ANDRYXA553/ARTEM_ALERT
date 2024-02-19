@@ -4,7 +4,7 @@ const dayjs = require('dayjs')
 
 dayjs.extend(isToday)
 
-const token = process.env.token || 'MTIwOTA2MTY0ODI2Njk1Njg5MQ.G30zYD.mokk4GHQBzy2iiwqqtvOh4O5F_C8bgK454TssU';
+const token = process.env.token
 
 const { joinVoiceChannel,createAudioPlayer,createAudioResource,AudioPlayerStatus } = require('@discordjs/voice');
 
