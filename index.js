@@ -4,7 +4,8 @@ const dayjs = require('dayjs')
 
 dayjs.extend(isToday)
 
-const token = process.env.token
+
+const token = process.env.token || 'MTIwOTA2MTY0ODI2Njk1Njg5MQ.Gdfclj.I3xBGMP6-rlnHL7oHf8QuNl-8u3UShgoZM6hJE'
 
 const { joinVoiceChannel,createAudioPlayer,createAudioResource,AudioPlayerStatus } = require('@discordjs/voice');
 
@@ -32,6 +33,7 @@ client.on('ready', () => {
 
 client.on('voiceStateUpdate', (oldState, newState) => {
     // if has been on server already
+    console.log('working')
     if(oldState.channelId === newState.channelId)return;
     const channel = client.channels.cache.get(monitoredChannelId);
 
@@ -47,6 +49,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
     if (newState.channel && newState.channel.id === monitoredChannelId && isAnyOurId) {
 
+        console.log('joined')
         // has been logged today
         if(
             process.env.onceAday &&
