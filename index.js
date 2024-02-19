@@ -33,7 +33,6 @@ client.on('ready', () => {
 
 client.on('voiceStateUpdate', (oldState, newState) => {
     // if has been on server already
-    console.log('working')
     if(oldState.channelId === newState.channelId)return;
     const channel = client.channels.cache.get(monitoredChannelId);
 
@@ -49,13 +48,13 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
     if (newState.channel && newState.channel.id === monitoredChannelId && isAnyOurId) {
 
-        console.log('joined')
+
         // has been logged today
-        if(
-            process.env.onceAday ||
-            (todaysJoinDate !==null
-            && dayjs().isToday(todaysJoinDate))
-        ) return;
+        // if(
+        //     process.env.onceAday ||
+        //     (todaysJoinDate !==null
+        //     && dayjs().isToday(todaysJoinDate))
+        // ) return;
 
         todaysJoinDate = new Date(new Date().getTime() + 7200000);
 
@@ -65,6 +64,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
             adapterCreator: channel.guild.voiceAdapterCreator,
         });
 
+        console.log('joined',todaysJoinDate)
         const player = createAudioPlayer();
         const resource = createAudioResource('./audiofile.mp3');
         const formattedDate = dayjs(todaysJoinDate).format('dddd, MMMM D, YYYY HH:mm')
