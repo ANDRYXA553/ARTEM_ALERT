@@ -28,7 +28,10 @@ const client = new Client({
 });
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
+
+    setInterval(()=> {
+        console.log(`Logged in as ${client.user.tag}, to prevent idle`);
+    },50_000)
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {
@@ -50,11 +53,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
 
         // has been logged today
-        // if(
-        //     process.env.onceAday ||
-        //     (todaysJoinDate !==null
-        //     && dayjs().isToday(todaysJoinDate))
-        // ) return;
+        if(process.env.onceAday && (todaysJoinDate !== null && dayjs().isToday(todaysJoinDate))) return;
 
         todaysJoinDate = new Date(new Date().getTime() + 7200000);
 
@@ -64,7 +63,6 @@ client.on('voiceStateUpdate', (oldState, newState) => {
             adapterCreator: channel.guild.voiceAdapterCreator,
         });
 
-        console.log('joined',todaysJoinDate)
         const player = createAudioPlayer();
         const resource = createAudioResource('./audiofile.mp3');
         const formattedDate = dayjs(todaysJoinDate).format('dddd, MMMM D, YYYY HH:mm')
