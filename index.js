@@ -47,7 +47,7 @@ client.on('voiceStateUpdate', (oldState, newState) => {
         return;
     }
 
-    const isAnyOurId = newState.member.user.id === artemUserId;
+    const isAnyOurId = newState.member.user.id === artemUserId || newState.member.user.id === andronUserId;
 
     if (newState.channel && newState.channel.id === monitoredChannelId && isAnyOurId) {
 
