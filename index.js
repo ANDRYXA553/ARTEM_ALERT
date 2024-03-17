@@ -6,6 +6,7 @@ dayjs.extend(isToday)
 
 
 const token = process.env.token
+const PORT = process.env.PORT || 8080;
 
 const { joinVoiceChannel,createAudioPlayer,createAudioResource,AudioPlayerStatus } = require('@discordjs/voice');
 
@@ -18,6 +19,18 @@ const monitoredChannelId = '973230021445570640';
 const messagesChannelId = '1209155717383323790';
 
 let todaysJoinDate = null
+
+const express = require('express')
+const app = express()
+
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', (req, res) => {
+    res.send('hello world')
+})
+
+app.listen(PORT, () => {
+    console.log(`Example app listening on port ${PORT}`)
+})
 
 const client = new Client({
     intents: [
